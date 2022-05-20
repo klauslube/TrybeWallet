@@ -2,6 +2,7 @@
 export const USER = 'USER';
 export const CURRENCIES = 'CURRENCIES';
 export const ADD_EXPENSES = 'ADD_EXPENSES';
+export const DELETE_EXPENSES = 'DELETE_EXPENSES';
 
 export const logUser = (payload) => ({
   type: USER,
@@ -16,6 +17,11 @@ export const currencies = (payload) => ({
 export const expenses = (payload) => ({
   type: ADD_EXPENSES,
   payload,
+});
+
+export const deleteExpenses = (id) => ({
+  type: DELETE_EXPENSES,
+  payload: id,
 });
 
 export const fetchCurrencies = () => async (dispatch) => {

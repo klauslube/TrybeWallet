@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { deleteExpenses } from '../actions/index';
 
 class Table extends Component {
   currencyNames = (obj) => {
@@ -24,8 +25,13 @@ class Table extends Component {
     return Number((value) * convert).toFixed(2);
   }
 
+  // deleteExpense = ({ target }) => {
+  //   const { expenses } = this.props;
+  //   deleteExp(expenses);
+  // }
+
   render() {
-    const { expenses } = this.props;
+    const { expenses, deleteExp } = this.props;
     return (
       <section>
         <table>
@@ -43,8 +49,8 @@ class Table extends Component {
             </tr>
           </thead>
           <tbody>
-            {expenses.map((obj, i) => (
-              <tr key={ i }>
+            {expenses.map((obj) => (
+              <tr key={ obj.id }>
                 <td>{obj.description}</td>
                 <td>{obj.tag}</td>
                 <td>{obj.method}</td>
@@ -53,7 +59,16 @@ class Table extends Component {
                 <td>{this.currencyNames(obj)}</td>
                 <td>{this.totalValue(obj)}</td>
                 <td>Real</td>
-                <td>Editar/Excluir</td>
+                <td>
+                  <button
+                    type="button"
+                    data-testid="delete-btn"
+                    onClick={ () => deleteExp(obj.id) }
+                  >
+                    Editar/Excluir
+                  </button>
+
+                </td>
               </tr>
             ))}
 
@@ -66,10 +81,15 @@ class Table extends Component {
 
 Table.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
+  deleteExp: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   expenses: state.wallet.expenses,
 });
 
-export default connect(mapStateToProps)(Table);
+const mapDispatchToProps = (dispatch) => ({
+  deleteExp: (id) => dispatch(deleteExpenses(id)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Table);
