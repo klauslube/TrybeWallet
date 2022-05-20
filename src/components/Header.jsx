@@ -8,13 +8,8 @@ class Header extends React.Component {
     return expenses.reduce((total, curr) => {
       const { currency, value, exchangeRates } = curr;
       const convert = exchangeRates[currency].ask * value;
-      return (convert + total);
+      return Number((convert + total).toFixed(2));
     }, 0);
-  }
-
-  totalValue = () => {
-    const total = (this.sumValues()).toFixed(2);
-    return total;
   }
 
   render() {
@@ -22,7 +17,7 @@ class Header extends React.Component {
     return (
       <header>
         <span data-testid="email-field">{ userName }</span>
-        <span data-testid="total-field">{this.totalValue()}</span>
+        <span data-testid="total-field">{this.sumValues()}</span>
         <p data-testid="header-currency-field">BRL</p>
       </header>
     );
