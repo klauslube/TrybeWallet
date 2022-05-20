@@ -63,6 +63,7 @@ class Wallet extends React.Component {
             Moeda:
             <select
               id="currency"
+              name="currency"
               value={ currency }
               onChange={ this.handleChange }
             >
