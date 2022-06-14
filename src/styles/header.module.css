@@ -1,0 +1,21 @@
+.header {
+  width: 100%;
+  display: flex;
+  background-color: #050506;
+  justify-content: space-around;
+  height: 100px;
+  align-items: center;
+}
+
+.value {
+  display: flex;
+  align-items: center;
+}
+.value p {
+  font-size: 30px;
+  margin-right: 5px;
+}
+h1 {
+  text-align: center;
+  margin: 0;
+}
